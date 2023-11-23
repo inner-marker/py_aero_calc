@@ -47,5 +47,6 @@ def main ():
 
 if __name__ == '__main__':
     """dunder main
+    this is the main func
     """    
     main()
