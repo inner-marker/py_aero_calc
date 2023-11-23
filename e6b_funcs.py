@@ -40,7 +40,9 @@ def userio_groundspeed_knots ():
 ############################################################
 
 def main ():
-    """main method
+    """Main method.
+    
+    Call all of the user io functions from here.
     """    
     # print('hello world!')
     userio_groundspeed_knots()
