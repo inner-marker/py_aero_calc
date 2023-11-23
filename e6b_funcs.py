@@ -40,13 +40,14 @@ def userio_groundspeed_knots ():
 ############################################################
 
 def main ():
-    """main method
+    """Main method.
+    
+    Call all of the user io functions from here.
     """    
     # print('hello world!')
     userio_groundspeed_knots()
 
 if __name__ == '__main__':
     """dunder main
-    this is the main func
     """    
     main()
