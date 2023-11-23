@@ -27,12 +27,20 @@ def calc_groundspeed_knots (distance_nm, hours):
 def userio_groundspeed_knots ():
     """User IO to calculate ground speed in knots
     """    
+    
+    # Create the variables
     user_distance_nautical_miles = 0
     user_hours = 0
     groundspeed_knots = 0
+    
+    # Get the values
     user_distance_nautical_miles = float(input('Distance (nm):    '))
     user_hours =                   float(input('Hours (decimal):  '))
+    
+    # Calculat the result
     groundspeed_knots = calc_groundspeed_knots(user_distance_nautical_miles,user_hours)
+    
+    # Print the result
     print("Ground Speed (knots): ", "{:.1f}".format(groundspeed_knots))
 
 ############################################################
