@@ -5,20 +5,21 @@ from constants import Constants
 ############################################################
 
 def calc_groundspeed (distance, time, **kwargs):
-    """calculate grounud speed in knots
+    """calculate grounud speed in knots.
+    By default, this function divides distance by time. You can specify the units for distance, time and the groundspeed output using the kwargs.
 
     Args:
         distance_nm (float): distance in nautical miles
         hours (float): hours to travel the distance
         **kwargs: keyword arguements
         
-        kwargs: (first value is the default)
-        distance_unit: 'nm', 'sm', 'km'
-        time_unit: 'hours', 'minutes', 'seconds'
-        groundspeed_unit: 'knots', 'mph', 'kph'
+    kwargs: (first value is the default)
+        distance_unit (str): nm, sm, km
+        time_unit (str): hours, minutes, seconds
+        groundspeed_unit (str): knots, mph, kph
 
     Returns:
-        float: ground speed in knots
+        float: ground speed in specified unit or knots
     """ 
     
     C = Constants()
@@ -71,37 +72,10 @@ def calc_groundspeed (distance, time, **kwargs):
         
     return groundspeed_output
 
-############################################################
-# User interaction functions
-############################################################
 
-def userio_groundspeed_knots ():
-    """User IO to calculate ground speed in knots
-    """    
-    
-    # Create the variables
-    user_distance = 0
-    user_distance_unit = "nm"
-    user_time = 0
-    user_time_unit = "hours"
-    groundspeed_knots = 0
-    user_groundspeed_unit = 'knots'
-        
-    # Get the values
-    user_distance =         float(input('Distance: '))
-    user_distance_unit =          input("Distance Unit ('nm', 'sm', 'km'): ")
-    user_time =             float(input('Time: '))
-    user_time_unit =              input("Time Unit ('hours', 'minutes', 'seconds'): ")
-    user_groundspeed_unit =              input("Groundspeed Unit ('knots', 'mph', 'kph'): ")
-    
-    # Calculat the result
-    groundspeed_knots = calc_groundspeed(user_distance,user_time, time_unit=user_time_unit, distance_unit = user_distance_unit, groundspeed_unit=user_groundspeed_unit)
-    
-    # Print the result
-    print("Ground Speed (knots): ", "{:.1f}".format(groundspeed_knots))
 
 ############################################################
-# Main functions
+# Main functions for testing
 ############################################################
 
 def main ():
@@ -110,7 +84,7 @@ def main ():
     Call all of the user io functions from here.
     """    
     # print('hello world!')
-    userio_groundspeed_knots()
+    print("Groundspeed: ", calc_groundspeed(450,30))
 
 if __name__ == '__main__':
     """dunder main
