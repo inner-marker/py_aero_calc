@@ -12,10 +12,10 @@ def calc_groundspeed (distance, time, **kwargs):
         hours (float): hours to travel the distance
         **kwargs: keyword arguements
         
-    kwargs: (first value is the default)
-    distance_unit = 'nm', 'sm', 'km'
-    time_unit = 'hours', 'minutes', 'seconds'
-    groundspeed_unit = 'knots', 'mph', 'kph'
+        kwargs: (first value is the default)
+        distance_unit: 'nm', 'sm', 'km'
+        time_unit: 'hours', 'minutes', 'seconds'
+        groundspeed_unit: 'knots', 'mph', 'kph'
 
     Returns:
         float: ground speed in knots
@@ -29,24 +29,28 @@ def calc_groundspeed (distance, time, **kwargs):
     groundspeed_output = 0
     
     # process the distance variable
-    if kwargs['distance_unit'] == "nm":
+    if 'distance_unit' in kwargs and kwargs['distance_unit'] == "nm":
         distance_nm = distance
-    elif kwargs['distance_unit'] == "sm":
+    elif 'distance_unit' in kwargs and kwargs['distance_unit'] == "sm":
         distance_nm = distance * C.NAUTICAL_MILES_PER_MILE
-    elif kwargs['distance_unit'] == "km":
+    elif 'distance_unit' in kwargs and kwargs['distance_unit'] == "km":
         distance_nm = distance * C.NAUTICAL_MILES_PER_KILOMETER
-    else:
+    elif 'distance_unit' in kwargs:
         print("Invalid distance unit arguement: ", kwargs['distance_unit'])
+    else:
+        distance_nm = distance
         
     # process the time variable
-    if kwargs['time_unit'] == "hours":
+    if 'time_unit' in kwargs and kwargs['time_unit'] == "hours":
         time_hours = time
-    elif kwargs['time_unit'] == "minutes":
+    elif 'time_unit' in kwargs and kwargs['time_unit'] == "minutes":
         time_hours = time / 60
-    elif kwargs['time_unit'] == "seconds":
+    elif 'time_unit' in kwargs and kwargs['time_unit'] == "seconds":
         time_hours = time / 3600
-    else:
+    elif 'time_unit' in kwargs:
         print("Invalid time unit arguement: ", kwargs['time_unit'])
+    else:
+        time_hours = time
         
     try:
         groundspeed_knots = distance_nm / time_hours
@@ -54,14 +58,16 @@ def calc_groundspeed (distance, time, **kwargs):
         print('possible divide by zero error')
         
     # process the groundspeed_output variable
-    if kwargs['groundspeed_unit'] == "knots":
+    if 'groundspeed_unit' in kwargs and kwargs['groundspeed_unit'] == "knots":
         groundspeed_output = groundspeed_knots
-    elif kwargs['groundspeed_unit'] == "mph":
+    elif 'groundspeed_unit' in kwargs and kwargs['groundspeed_unit'] == "mph":
         groundspeed_output = groundspeed_knots * C.MILES_PER_NAUTICAL_MILE
-    elif kwargs['groundspeed_unit'] == "kph":
+    elif 'groundspeed_unit' in kwargs and kwargs['groundspeed_unit'] == "kph":
         groundspeed_output = groundspeed_knots * C.KILOMETERS_PER_NAUTICAL_MILE
-    else:
+    elif 'groundspeed_unit' in kwargs:
         print("Invalid groundspeed unit arguement: ", kwargs['groundspeed_unit'])
+    else:
+        groundspeed_output = groundspeed_knots
         
     return groundspeed_output
 
@@ -74,17 +80,22 @@ def userio_groundspeed_knots ():
     """    
     
     # Create the variables
-    user_distance_nautical_miles = 0
+    user_distance = 0
+    user_distance_unit = "nm"
     user_time = 0
-    groundspeed_knots = 0
     user_time_unit = "hours"
-    
+    groundspeed_knots = 0
+    user_groundspeed_unit = 'knots'
+        
     # Get the values
-    user_distance_nautical_miles = float(input('Distance (nm):    '))
-    user_time =                    float(input('Time (decimal):  '))
-    user_time_unit = input("Time Unit ('hours', 'minutes'): ")
+    user_distance =         float(input('Distance: '))
+    user_distance_unit =          input("Distance Unit ('nm', 'sm', 'km'): ")
+    user_time =             float(input('Time: '))
+    user_time_unit =              input("Time Unit ('hours', 'minutes', 'seconds'): ")
+    user_groundspeed_unit =              input("Groundspeed Unit ('knots', 'mph', 'kph'): ")
+    
     # Calculat the result
-    groundspeed_knots = calc_groundspeed(user_distance_nautical_miles,user_time, time_unit=user_time_unit)
+    groundspeed_knots = calc_groundspeed(user_distance,user_time, time_unit=user_time_unit, distance_unit = user_distance_unit, groundspeed_unit=user_groundspeed_unit)
     
     # Print the result
     print("Ground Speed (knots): ", "{:.1f}".format(groundspeed_knots))
