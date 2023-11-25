@@ -8,3 +8,46 @@ Install from requirements.txt
 ```
 pip install -r requirements.txt
 ```
+# How To Use the Tools
+
+## Units of Measure List
+NOTE: If grammar would call for a plural in the context, the plural suffix ('s', 'es') should not be added. 
+
+### Length
+|Name            |Abbreviation|
+|:---------------|-----------:|
+|Miles, Statute|mi|
+|yards|yd|
+|feet|ft|
+|inches|in|
+|Kilometers|km|
+|meters|m|
+|Miles, Nautical|nmi|
+
+### Speed
+|Name            |Abbreviation|
+|:---------------|-----------:|
+|Knots|kts|
+|Miles per Hour|mph|
+|Kilometers per Hour|kph|
+|meters per second|mps|
+
+### Mass, Weight, Force
+|Name            |Abbreviation|
+|:---------------|-----------:|
+|pound (mass)|lb|
+|pound (force)|lbf|
+|Newton|N|
+|kilogram|kg|
+
+
+### Time
+|Name            |Abbreviation|
+|:---------------|-----------:|
+|second|sec|
+|minute|min|
+|hour|hr|
+|day|day|
+
+
+

@@ -1,4 +1,4 @@
-from constants import Constants
+from conversions import Conversions
 
 ############################################################
 # Calculation functions
@@ -22,7 +22,7 @@ def calc_groundspeed (distance, time, **kwargs):
         float: ground speed in specified unit or knots
     """ 
     
-    C = Constants()
+    C = Conversions()
     
     distance_nm = 0
     time_hours = 0

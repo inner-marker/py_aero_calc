@@ -1,6 +1,6 @@
 ######## Constants
 
-class Constants:
+class Conversions:
     def __init__(self) -> None:
         self.KILOMETERS_PER_NAUTICAL_MILE = 1.852
         self.METERS_PER_NAUTICAL_MILE = 1852
@@ -20,6 +20,23 @@ class Constants:
         self.YARDS_PER_MILE = 1760
         self.FEET_PER_MILE = 5280
         self.INCHES_PER_MILE = 63360
+        
+        @staticmethod
+        def conv_distance(value, *args, **kwargs):
+            """Convert distance units
+
+            Args:
+                value (float): input value
+
+            kwargs:
+                value_unit (str): abbreviations per README
+                output_unit (str): abbreviations per README
+            
+            Returns:
+                float: output value in new unit
+            """            
+            output = 0.0
+            return output
         
         
         
