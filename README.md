@@ -1,13 +1,7 @@
-### Introduction
+# Introduction
 
 This is a group of functions and tools that calculate numerous values related to aeronautics.
 
-### Additioanal Info
-Install from requirements.txt
-
-```
-pip install -r requirements.txt
-```
 # How To Use the Tools
 
 ## Units of Measure List
@@ -49,5 +43,10 @@ NOTE: If grammar would call for a plural in the context, the plural suffix ('s',
 |hour|hr|
 |day|day|
 
+# Additional Info
 
+##### Install from requirements.txt
+```
+pip install -r requirements.txt
+```
 
