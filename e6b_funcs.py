@@ -1,25 +1,55 @@
+from constants import Constants
+
 ############################################################
 # Calculation functions
 ############################################################
 
-def calc_groundspeed_knots (distance_nm, time, time_unit = "hours"):
-    """calculate grounud speed in knots
+def calc_groundspeed (distance, time, **kwargs):
+    """calculate grounud speed in knots.
+    By default, this function divides distance by time. You can specify the units for distance, time and the groundspeed output using the kwargs.
 
     Args:
         distance_nm (float): distance in nautical miles
         hours (float): hours to travel the distance
-        time_unit (Str): Time unit. "hours" (default), "minutes"
+        **kwargs: keyword arguements
+        
+    kwargs: (first value is the default)
+        distance_unit (str): nm, sm, km
+        time_unit (str): hours, minutes, seconds
+        groundspeed_unit (str): knots, mph, kph
 
     Returns:
-        float: ground speed in knots
+        float: ground speed in specified unit or knots
     """ 
     
-    groundspeed_knots = 0
-    time_hours = 0
+    C = Constants()
     
+    distance_nm = 0
+    time_hours = 0
+    groundspeed_knots = 0
+    groundspeed_output = 0
+    
+    # process the distance variable
+    if 'distance_unit' in kwargs and kwargs['distance_unit'] == "nm":
+        distance_nm = distance
+    elif 'distance_unit' in kwargs and kwargs['distance_unit'] == "sm":
+        distance_nm = distance * C.NAUTICAL_MILES_PER_MILE
+    elif 'distance_unit' in kwargs and kwargs['distance_unit'] == "km":
+        distance_nm = distance * C.NAUTICAL_MILES_PER_KILOMETER
+    elif 'distance_unit' in kwargs:
+        print("Invalid distance unit arguement: ", kwargs['distance_unit'])
+    else:
+        distance_nm = distance
+        
     # process the time variable
-    if time_unit == "minutes":
+    if 'time_unit' in kwargs and kwargs['time_unit'] == "hours":
+        time_hours = time
+    elif 'time_unit' in kwargs and kwargs['time_unit'] == "minutes":
         time_hours = time / 60
+    elif 'time_unit' in kwargs and kwargs['time_unit'] == "seconds":
+        time_hours = time / 3600
+    elif 'time_unit' in kwargs:
+        print("Invalid time unit arguement: ", kwargs['time_unit'])
     else:
         time_hours = time
         
@@ -27,34 +57,25 @@ def calc_groundspeed_knots (distance_nm, time, time_unit = "hours"):
         groundspeed_knots = distance_nm / time_hours
     except:
         print('possible divide by zero error')
-    return groundspeed_knots
+        
+    # process the groundspeed_output variable
+    if 'groundspeed_unit' in kwargs and kwargs['groundspeed_unit'] == "knots":
+        groundspeed_output = groundspeed_knots
+    elif 'groundspeed_unit' in kwargs and kwargs['groundspeed_unit'] == "mph":
+        groundspeed_output = groundspeed_knots * C.MILES_PER_NAUTICAL_MILE
+    elif 'groundspeed_unit' in kwargs and kwargs['groundspeed_unit'] == "kph":
+        groundspeed_output = groundspeed_knots * C.KILOMETERS_PER_NAUTICAL_MILE
+    elif 'groundspeed_unit' in kwargs:
+        print("Invalid groundspeed unit arguement: ", kwargs['groundspeed_unit'])
+    else:
+        groundspeed_output = groundspeed_knots
+        
+    return groundspeed_output
+
+
 
 ############################################################
-# User interaction functions
-############################################################
-
-def userio_groundspeed_knots ():
-    """User IO to calculate ground speed in knots
-    """    
-    
-    # Create the variables
-    user_distance_nautical_miles = 0
-    user_time = 0
-    groundspeed_knots = 0
-    user_time_unit = "hours"
-    
-    # Get the values
-    user_distance_nautical_miles = float(input('Distance (nm):    '))
-    user_time =                    float(input('Time (decimal):  '))
-    user_time_unit = input("Time Unit ('hours', 'minutes'): ")
-    # Calculat the result
-    groundspeed_knots = calc_groundspeed_knots(user_distance_nautical_miles,user_time, time_unit=user_time_unit)
-    
-    # Print the result
-    print("Ground Speed (knots): ", "{:.1f}".format(groundspeed_knots))
-
-############################################################
-# Main functions
+# Main functions for testing
 ############################################################
 
 def main ():
@@ -63,7 +84,7 @@ def main ():
     Call all of the user io functions from here.
     """    
     # print('hello world!')
-    userio_groundspeed_knots()
+    print("Groundspeed: ", calc_groundspeed(450,30))
 
 if __name__ == '__main__':
     """dunder main
