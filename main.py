@@ -6,7 +6,7 @@
 import importlib, os, re, sys
 
 # Constants
-MODULES_DIRECTORY = './plugins'
+MODULES_DIRECTORY = './modules'
 #add system path to the plugins directory to make this more universal
 sys.path.append(MODULES_DIRECTORY)
 
@@ -17,11 +17,11 @@ def load_modules():
     print ("Loading Modules...")
     
     counter = 1
-    for plugin_file in sorted(os.listdir(MODULES_DIRECTORY)):
-        if re.search('\.py$', plugin_file):
-            module_name = re.sub('\.py$', '', plugin_file)
+    for module_file in sorted(os.listdir(MODULES_DIRECTORY)):
+        if re.search('\.py$', module_file):
+            module_name = re.sub('\.py$', '', module_file)
             module = importlib.import_module(module_name)
-            modules[counter] = module.Plugin()
+            modules[counter] = module.Module()
             # print ("   %s" % ( module_name ))
             counter += 1
     

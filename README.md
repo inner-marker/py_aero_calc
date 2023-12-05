@@ -4,6 +4,11 @@ This is a group of functions and tools that calculate numerous values related to
 
 # How To Use the Tools
 
+# Developement
+See [MODULES.md](./MODULES.md) for the specification on how to write a moudule.
+
+# References
+
 ## Units of Measure List
 NOTE: If grammar would call for a plural in the context, the plural suffix ('s', 'es') should not be added. 
 
